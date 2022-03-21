@@ -6,11 +6,14 @@ using UnityEditor;
 using TMPro;
 
 
-
 public class HandleMenuUI : MonoBehaviour
 {
 
+    public TextMeshProUGUI PlayerNameInput;
+
+
     public void StartGame(){
+        HandlePlayerData.Instance.PlayerName = PlayerNameInput.text;
         SceneManager.LoadScene("main");
     }
 
