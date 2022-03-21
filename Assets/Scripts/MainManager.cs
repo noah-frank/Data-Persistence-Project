@@ -23,10 +23,11 @@ public class MainManager : MonoBehaviour
     private static string CurrentHighscoreUserName;
 
 
+    private void Awake(){
+        LoadGameData();
+    }
 
 
-    
-    // Start is called before the first frame update
     void Start()
     {
 
