@@ -12,6 +12,7 @@ public class MainManager : MonoBehaviour
     public Rigidbody Ball;
 
     public Text ScoreText;
+    public Text HighscoreText;
     public GameObject GameOverText;
     
     private bool m_Started = false;
@@ -32,6 +33,10 @@ public class MainManager : MonoBehaviour
     {
 
         ScoreText.text = HandlePlayerData.Instance.PlayerName + " : 0";
+        if(CurrentHighscore == 0){
+            HighscoreText.gameObject.SetActive(false);
+        }
+        HighscoreText.text = "Best Score: " + CurrentHighscoreUserName + ": " + CurrentHighscore;
 
         const float step = 0.6f;
         int perLine = Mathf.FloorToInt(4.0f / step);
@@ -82,6 +87,9 @@ public class MainManager : MonoBehaviour
     public void GameOver()
     {
         m_GameOver = true;
+        if(m_Points > CurrentHighscore){
+            SaveGameData(HandlePlayerData.Instance.PlayerName, m_Points);
+        }
         GameOverText.SetActive(true);
     }
 
