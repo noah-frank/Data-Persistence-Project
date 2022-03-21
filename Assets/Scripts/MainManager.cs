@@ -89,6 +89,9 @@ public class MainManager : MonoBehaviour
         m_GameOver = true;
         if(m_Points > CurrentHighscore){
             SaveGameData(HandlePlayerData.Instance.PlayerName, m_Points);
+            CurrentHighscore = m_Points;
+            CurrentHighscoreUserName = HandlePlayerData.Instance.PlayerName;
+            HighscoreText.gameObject.SetActive(true);
         }
         GameOverText.SetActive(true);
     }
@@ -99,12 +102,12 @@ public class MainManager : MonoBehaviour
 
 
 
-    public void SaveGameData(string bestPlaterName, int bestPlayerScore) 
+    public void SaveGameData(string player, int score) 
     {
         SaveData data = new SaveData();
 
-        data.HighscoreUserName = CurrentHighscoreUserName;
-        data.Highscore = CurrentHighscore;
+        data.HighscoreUserName = player;
+        data.Highscore = score;
 
         string json = JsonUtility.ToJson(data);
         File.WriteAllText(Application.persistentDataPath + "/savefile.json", json);
